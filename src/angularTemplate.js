@@ -60,8 +60,10 @@ export default class ReactAngular extends React.Component {
 
     if (children) {
       if (!React.isValidElement(children)) {
-        throw new Error(`Only one child is allowed in AngularTemplate.
-          Found ${children.length}: ${children.map(({type}) => type).join(', ')}.`);
+        const msg = children.map
+          ? `Found ${children.length}: ${children.map(({type}) => type).join(', ')}.`
+          : `Found ${children}.`;
+        throw new Error(`Only one child is allowed in AngularTemplate. ${msg}`);
       }
 
       const classesKey = isCustomComponent(children.type, children.props) ? 'class' : 'className';
